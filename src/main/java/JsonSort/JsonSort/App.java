@@ -27,7 +27,7 @@ public class App
 		JsonElement root;
 		mainTreeMap = new TreeMap<String, Object>();
 		try {
-			root = new JsonParser().parse(new FileReader("/Users/sannigeri/Desktop/file1.json"));
+			root = new JsonParser().parse(new FileReader("/Users/sannigeri/Desktop/file.json"));
 			JsonObject jsonObject = root.getAsJsonObject();
 			
 			mainTreeMap = sortJsonElement(jsonObject);
@@ -46,14 +46,14 @@ public class App
 		}
 	}
 	
-	public static TreeMap<String, Object> sortJsonElement (JsonObject jsonObject){//, TreeMap<String, Object> parentMap){
+	public static TreeMap<String, Object> sortJsonElement (JsonObject jsonObject){
 		TreeMap<String, Object> treeMap = new TreeMap<String, Object>();
 		
 		for (Entry<String, JsonElement> entry : jsonObject.entrySet()) {
 			if(entry.getValue().isJsonObject()){				
-				treeMap.put(entry.getKey(), sortJsonElement(entry.getValue().getAsJsonObject()));
+				treeMap.put("\""+entry.getKey()+"\"", sortJsonElement(entry.getValue().getAsJsonObject()));
 			}else{
-					treeMap.put(entry.getKey(), entry.getValue());
+					treeMap.put("\""+entry.getKey()+"\"", entry.getValue());
 			}
 		}
 		
